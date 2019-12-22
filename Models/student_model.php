@@ -50,18 +50,7 @@ function get_class_data() {
     return $rows;
 }
 
-function get_subject_data() {
-    $query = "select * from subjects";
-    include "connection.php";
-    $result = mysqli_query($connection,$query);
-    $rows = [];
-    if($result && mysqli_num_rows($result) > 0 ){
-        foreach ($result as $record) {
-            $rows[] = $record;
-        }
-    }
-    return $rows;
-}
+
 
 function student_add_data($data) {
     include "connection.php";
@@ -97,6 +86,49 @@ function delete_data(){
     return $result;
 }
 
+function get_subject_data() {
+    $query = "select * from subjects";
+    include "connection.php";
+    $result = mysqli_query($connection,$query);
+    $rows = [];
+    if($result && mysqli_num_rows($result) > 0 ){
+        foreach ($result as $record) {
+            $rows[] = $record;
+        }
+    }
+    return $rows;
+}
+
+
+
+
+
+
+function get_subject_edit_data(){
+    $query = "select * from subjects";
+    include "connection.php";
+    $result = mysqli_query($connection,$query);
+    $rows = [];
+    if($result && mysqli_num_rows($result) > 0 ){
+        foreach ($result as $record) {
+            $rows[] = $record;
+        }
+    }
+    return $rows;
+}
+
+function get_class_data_edit(){
+    $query = "select * from class";
+    include "connection.php";
+    $result = mysqli_query($connection,$query);
+    $rows = [];
+    if($result && mysqli_num_rows($result) > 0 ){
+        foreach ($result as $record) {
+            $rows[] = $record;
+        }
+    }
+    return $rows;
+}
 
 function m_edit() {
     $id = $_GET['id'];
@@ -114,29 +146,20 @@ function m_edit() {
     return $rows;
 }
 
-function get_subject_edit_data(){
-    $query = "select * from subjects";
-    include "connection.php";
-    $result = mysqli_query($connection,$query);
-    $rows = [];
-    if($result && mysqli_num_rows($result) > 0 ){
-        foreach ($result as $record) {
-            $rows[] = $record;
-        }
-    }
-    return $rows;
-}
-
 function m_update_data() {
+    include "connection.php";
     $id  = $_POST['id'];
     $name = $_POST['firstname'];
     $lastname = $_POST['lastname'];
     $class = $_POST['class'];
     $sex = $_POST['sex'];
-    $subjects = $_POST['subjects[]'];
-    $rows= [];
-    foreach ($subjects as $key => $value) {
-        $rows[] = $value;
+    $subjects = $_POST['subjects'];
+
+    $row = [];
+    foreach ( $subjects as $value) {
+        $row[] = $value;
     }
-    var_dump($rows);
+    $query ="UPDATE student st INNER JOIN class cl  SET firstname = '$name', lastname = '$lastname', sex = '$sex', class_id = $class WHERE st.id = $id";
+    $update = mysqli_query($connection, $query);
+    return $update;
 }

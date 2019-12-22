@@ -11,11 +11,6 @@ function get_action(&$data){
     $function($data);
 }
 
-function edit(&$data) {
-    $data['student'] = m_edit($_GET);
-    $data['subject_data'] = get_subject_edit_data();
-    $data['page'] = "students/edit";
-}
 
 function view(&$data) {
     $data['student_data'] = m_get_data();
@@ -47,15 +42,29 @@ function delete(&$data) {
     header("Location: index.php?action=$action");
 }
 
+
+
+
+
+
+
+function edit(&$data) {
+    $data['student'] = m_edit($_GET);
+    $data['subject_data'] = get_subject_edit_data();
+    $data['class'] = get_class_data_edit();
+    $data['page'] = "students/edit";
+}
+
+
 function edit_data(&$data) {
     $update_data = m_update_data($_POST);
     if($update_data) {
         $action = "view";
-    }else {
-        $action = "edit";
-    }
+    }   
     header("Location: index.php?action=$action");
 }
+
+
 
 
 

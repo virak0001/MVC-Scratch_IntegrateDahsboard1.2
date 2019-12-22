@@ -24,9 +24,13 @@
                                 <div class="form-group">
                                     <label for="class">Class:</label>
                                     <select name="class" id="class" class="form-control">
-                                        <option <?php if ($row['title'] == 'WEP2020-A') { ?> selected="selected" <?php } ?> value="WEP2020-A">WEP2020-A</option>
-                                        <option <?php if ($row['title'] == 'WEP2020-B') { ?> selected="selected" <?php } ?> value="WEP2020-B">WEP2020-B</option>
-                                        <option <?php if ($row['title'] == 'SNA2020') { ?> selected="selected" <?php } ?> value="SNA2020">SNA2020</option>
+                                    <?php
+                                        foreach ($data['class'] as $rows) {
+                                        ?>
+                                            <option value="<?php echo $rows['id']; ?>"><?php echo $rows['title']; ?></option>
+                                        <?php
+                                        }
+                                        ?>
                                     </select>
                                 </div>
                                 <div class="form-group">
